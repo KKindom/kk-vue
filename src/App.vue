@@ -1,9 +1,7 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div>this is main component content</div>
+  <!-- 路由出口 -->
+  <router-view />
 </template>
 
 <style lang="scss">
