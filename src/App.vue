@@ -1,5 +1,9 @@
 <template>
-  <div>this is main component content</div>
+  <div>
+    this is main component content
+    <br />
+    这是vue主页
+  </div>
   <!-- 路由出口 -->
   <router-view />
 </template>
