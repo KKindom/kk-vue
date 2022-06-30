@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
 
 
   },
-  // 重定向
+  //重定向
   {
     path: '/',
     redirect: '/login'

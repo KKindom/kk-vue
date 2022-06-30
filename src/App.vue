@@ -4,6 +4,9 @@
     <br />
     这是vue主页
   </div>
+  <el-button type="primary">Primary</el-button>
+  <el-button type="success">Success</el-button>
+  <el-button type="danger">Danger</el-button>
   <!-- 路由出口 -->
   <router-view />
 </template>
