@@ -65,7 +65,11 @@ import { reactive, ref } from "vue";
 //表单校验
 import type { FormInstance } from "element-plus";
 // 引用表单校验函数
-import * as check from '@/tools/verfifcation.js'
+import * as check from "@/tools/verfifcation.js";
+//引入 获取json-server中的数据
+import link from "@/api/Link.js";
+//引用url
+import url from "@/api/url.js";
 //登录表单数据
 const MenuData = reactive([
   { text: "登录", current: true, type: "login" },
@@ -86,8 +90,6 @@ let changeMenu = (item: any) => {
 const ruleFormRef = ref<FormInstance>();
 //校验邮箱
 const checEmail = (rule: any, value: any, callback: any) => {
-  let reg = /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{2,4}){1,3}$/;
-
   if (!value) {
     return callback(new Error("邮箱非空，请重新输入邮箱！"));
   } else if (!check.checkEmail(value)) {
@@ -98,8 +100,6 @@ const checEmail = (rule: any, value: any, callback: any) => {
 };
 //校验密码
 const checPassword = (rule: any, value: any, callback: any) => {
-  let reg = /^(?!\D+$)(?![^a-zA-Z]+$)\S{6,10}$/; //验证密码 为数字+字母
-
   if (value === "") {
     callback(new Error("密码不为空"));
   } else {
@@ -137,12 +137,15 @@ const rules = reactive({
   password: [{ validator: checPassword, trigger: "blur" }],
   re_password: [{ validator: checRepassword, trigger: "blur" }],
 });
-
+//提交表单
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      console.log("submit!");
+      //  成功
+      link(url.one).then((ok: any) => {
+        console.log(ok);
+      });
     } else {
       console.log("error submit!");
       return false;

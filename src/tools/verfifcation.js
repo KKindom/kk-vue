@@ -1,3 +1,5 @@
+//验证函数
+
 export function checkEmail(data) {
     let reg = /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{2,4}){1,3}$/;
 
