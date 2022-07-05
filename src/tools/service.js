@@ -11,7 +11,7 @@ else {
 //创建实例
 const service = axios.create(
     {
-        baseURL:axiosurl
+        baseURL: axiosurl
     }
 );
 // 添加请求拦截器
@@ -29,6 +29,19 @@ service.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     // 对响应错误做点什么
+    //响应 错误
+    console.log(error.response.status);
+    switch (error.response.status) {
+        case 404:
+            alert("当前路径有误！")
+            break;
+        case 500:
+            alert("服务器连接失败，请稍后再试！")
+            break;
+        default:
+            alert("服务器连接失败，请稍后再试！")
+            break;
+    }
     return Promise.reject(error);
 });
 //导出拦截器 

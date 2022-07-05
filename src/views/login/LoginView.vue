@@ -48,9 +48,12 @@
             />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm(ruleFormRef)">{{
-              model === "login" ? "登录" : "注册"
-            }}</el-button>
+            <el-button
+              type="primary"
+              @click="submitForm(ruleFormRef)"
+              :disabled="btnbool"
+              >{{ model === "login" ? "登录" : "注册" }}</el-button
+            >
           </el-form-item>
         </el-form>
       </div>
@@ -63,7 +66,7 @@
 //引入提示框
 import { ElMessage } from "element-plus";
 //创建复杂数据类型
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, watch } from "vue";
 //表单校验
 import type { FormInstance } from "element-plus";
 // 引用表单校验函数
@@ -76,6 +79,7 @@ import link from "@/api/Link.js";
 
 //引用url
 import url from "@/api/url.js";
+import { and } from "@vueuse/core";
 // const url = require("@/api/url.js");
 //登录表单数据
 const MenuData = reactive([
@@ -149,16 +153,30 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
+      let data = {
+        name: ruleForm.username,
+        pwd: ruleForm.password,
+      };
       //判断登录和注册
       if (model.value === "login") {
         //登录
         console.log("登录");
+        //登录请求
+        link(url.register, "get", {}, data).then((ok: any) => {
+          console.log(ok);
+          if (Object.keys(ok.data).length !== 0) {
+            console.log("登录成功！");
+            //弹窗不显示 有问题
+            alert("登录成功！");
+          } else {
+            console.log("登录失败！");
+            alert("登录失败请检查账号密码是否正确！");
+            ElMessage.error("Oops, this is a error message.");
+          }
+        });
       } else {
         //  注册
-        let data = {
-          name: ruleForm.username,
-          pwd: ruleForm.password,
-        };
+        //注册请求 类型为post
         link(url.register, "POST", data).then((ok: any) => {
           console.log(ok);
           if (Object.keys(ok.data).length !== 0) {
@@ -186,6 +204,29 @@ const submitForm = (formEl: FormInstance | undefined) => {
 
 onMounted(() => {
   console.log(process.env.VUE_APP_API);
+});
+
+//配置登录/注册按钮是否可用
+let btnbool = ref(true);
+//添加登录按钮监听
+watch(ruleForm, (newval, oldval) => {
+  if (model.value === "login") {
+    if (newval.username != "" && newval.password != "") {
+      btnbool.value = false;
+    } else {
+      btnbool.value = true;
+    }
+  } else {
+    if (
+      newval.username != "" &&
+      newval.password != "" &&
+      newval.re_password != ""
+    ) {
+      btnbool.value = false;
+    } else {
+      btnbool.value = true;
+    }
+  }
 });
 
 //重置选项 暂时未用
