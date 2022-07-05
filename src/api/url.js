@@ -1,6 +1,6 @@
 //url封装
 let apiUrl = {
-    one: "http://localhost:8888/kkindom"
+    register: "/register"
 }
 
 export default apiUrl;

@@ -41,7 +41,7 @@
             v-show="model === 'register'"
           >
             <el-input
-              v-model.number="ruleForm.re_password"
+              v-model="ruleForm.re_password"
               maxlength="10"
               show-word-limit
               type="password"
@@ -60,16 +60,23 @@
 
 
 <script lang="ts" setup>
+//引入提示框
+import { ElMessage } from "element-plus";
 //创建复杂数据类型
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted } from "vue";
 //表单校验
 import type { FormInstance } from "element-plus";
 // 引用表单校验函数
 import * as check from "@/tools/verfifcation.js";
+// declare const require: any;
+// const check = require("@/tools/verfifcation.js");
 //引入 获取json-server中的数据
 import link from "@/api/Link.js";
+// const link = require("@/api/Link.js");
+
 //引用url
 import url from "@/api/url.js";
+// const url = require("@/api/url.js");
 //登录表单数据
 const MenuData = reactive([
   { text: "登录", current: true, type: "login" },
@@ -142,16 +149,45 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      //  成功
-      link(url.one).then((ok: any) => {
-        console.log(ok);
-      });
+      //判断登录和注册
+      if (model.value === "login") {
+        //登录
+        console.log("登录");
+      } else {
+        //  注册
+        let data = {
+          name: ruleForm.username,
+          pwd: ruleForm.password,
+        };
+        link(url.register, "POST", data).then((ok: any) => {
+          console.log(ok);
+          if (Object.keys(ok.data).length !== 0) {
+            console.log("注册成功！");
+            //弹窗不显示 有问题
+            ElMessage("this is a message.");
+            //切换模式到注册页面
+            model.value = "login";
+            MenuData.forEach((V) => {
+              V.current = false;
+            });
+            MenuData[0].current = true;
+          } else {
+            console.log("注册失败！");
+            ElMessage.error("Oops, this is a error message.");
+          }
+        });
+      }
     } else {
       console.log("error submit!");
       return false;
     }
   });
 };
+
+onMounted(() => {
+  console.log(process.env.VUE_APP_API);
+});
+
 //重置选项 暂时未用
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;

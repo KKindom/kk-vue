@@ -1,16 +1,24 @@
 {
-    "kkindom": [
+    "register": [
         {
-            "name": "java"
+            "id": 1,
+            "name": "admin@qq.com",
+            "pwd": "admin123"
         },
         {
-            "name": "vue"
+            "name": "1184045779@qq.com",
+            "pwd": "123456a",
+            "id": 2
         },
         {
-            "name": "c++"
+            "name": "123456@qq.com",
+            "pwd": "12345a",
+            "id": 3
         },
         {
-            "name": "golang"
+            "name": "999@qq.com",
+            "pwd": "12345a",
+            "id": 4
         }
     ]
 }

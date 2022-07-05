@@ -2,13 +2,13 @@
 import service from '@/tools/service.js'
 
 
-let link = (url, methods="get", data, params) => {
+let link = (url, method = "get", data, params) => {
     return new Promise((resolve, reject) => {
         service.request(
             {
                 //es6键值对省略 可直接匹配
                 url,
-                methods,
+                method,
                 data,
                 params
             }).then((ok) => {
