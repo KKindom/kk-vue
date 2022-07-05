@@ -1,29 +1,34 @@
 {
-  "register": [
-    {
-      "id": 1,
-      "name": "admin@qq.com",
-      "pwd": "admin123"
-    },
-    {
-      "name": "1184045779@qq.com",
-      "pwd": "123456a",
-      "id": 2
-    },
-    {
-      "name": "123456@qq.com",
-      "pwd": "12345a",
-      "id": 3
-    },
-    {
-      "name": "999@qq.com",
-      "pwd": "12345a",
-      "id": 4
-    },
-    {
-      "name": "45412@qq.com",
-      "pwd": "12345a",
-      "id": 5
-    }
-  ]
+    "register": [
+        {
+            "id": 1,
+            "name": "admin@qq.com",
+            "pwd": "admin123"
+        },
+        {
+            "name": "1184045779@qq.com",
+            "pwd": "123456a",
+            "id": 2
+        },
+        {
+            "name": "123456@qq.com",
+            "pwd": "12345a",
+            "id": 3
+        },
+        {
+            "name": "999@qq.com",
+            "pwd": "12345a",
+            "id": 4
+        },
+        {
+            "name": "45412@qq.com",
+            "pwd": "12345a",
+            "id": 5
+        },
+        {
+            "name": "123456@qq.com",
+            "pwd": "9cbf8a4dcb8e30682b927f352d6559a0",
+            "id": 6
+        }
+    ]
 }

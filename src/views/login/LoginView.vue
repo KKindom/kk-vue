@@ -71,15 +71,13 @@ import { reactive, ref, onMounted, watch } from "vue";
 import type { FormInstance } from "element-plus";
 // 引用表单校验函数
 import * as check from "@/tools/verfifcation.js";
-// declare const require: any;
-// const check = require("@/tools/verfifcation.js");
 //引入 获取json-server中的数据
 import link from "@/api/Link.js";
-// const link = require("@/api/Link.js");
 
+//引用加密函数
+import useMd5 from "@/hook/index.js";
 //引用url
 import url from "@/api/url.js";
-import { and } from "@vueuse/core";
 // const url = require("@/api/url.js");
 //登录表单数据
 const MenuData = reactive([
@@ -155,7 +153,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (valid) {
       let data = {
         name: ruleForm.username,
-        pwd: ruleForm.password,
+        pwd: useMd5(ruleForm.password).value,
       };
       //判断登录和注册
       if (model.value === "login") {
@@ -177,6 +175,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
       } else {
         //  注册
         //注册请求 类型为post
+        //加密注册的密码
         link(url.register, "POST", data).then((ok: any) => {
           console.log(ok);
           if (Object.keys(ok.data).length !== 0) {

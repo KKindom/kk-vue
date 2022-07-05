@@ -3,3 +3,4 @@
 declare module '@/tools/verfifcation.js' // declare module 'xxx'路径或者模块名
 declare module '@/api/Link.js' // declare module 'xxx'路径或者模块名
 declare module '@/api/url.js' // declare module 'xxx'路径或者模块名
+declare module "@/hook/index.js"
