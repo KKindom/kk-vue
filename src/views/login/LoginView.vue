@@ -78,6 +78,9 @@ import link from "@/api/Link.js";
 import useMd5 from "@/hook/index.js";
 //引用url
 import url from "@/api/url.js";
+//引入router 来跳转网页
+import { useRouter } from "vue-router";
+let router = useRouter();
 // const url = require("@/api/url.js");
 //登录表单数据
 const MenuData = reactive([
@@ -166,6 +169,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
             console.log("登录成功！");
             //弹窗不显示 有问题
             alert("登录成功！");
+            router.push("/home");
           } else {
             console.log("登录失败！");
             alert("登录失败请检查账号密码是否正确！");
