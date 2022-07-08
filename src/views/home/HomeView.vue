@@ -5,9 +5,12 @@
         <LeftMenu />
       </el-aside>
       <el-container>
-        <el-header><RightTop /></el-header>
-
-        <el-main><router-view></router-view></el-main>
+        <el-header>
+          <RightTop />
+        </el-header>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
         <el-footer>Footer</el-footer>
       </el-container>
     </el-container>
@@ -23,12 +26,19 @@ import RightTop from "@/components/RightTop.vue";
 .el-aside {
   background-color: #fff;
 }
+
 .el-main {
   background-color: pink;
 }
+
 .el-header {
   background-color: yellowgreen;
 }
+
+.el-footer {
+  background-color: aqua;
+}
+
 //设置自适应行高
 .el-container,
 .el-aside,

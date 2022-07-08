@@ -1,10 +1,7 @@
 <template>
-  <div>用户信息统计</div>
+  <div>用户信息统计 <router-view /></div>
 </template>
 
-<script>
-export default {};
-</script>
+<script lang="ts"></script>
 
-<style>
-</style>
+<style></style>
