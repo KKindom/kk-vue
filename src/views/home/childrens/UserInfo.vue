@@ -1,5 +1,5 @@
 <template>
-  <div>用户信息统计 <router-view /></div>
+  <div><router-view /></div>
 </template>
 
 <script lang="ts"></script>

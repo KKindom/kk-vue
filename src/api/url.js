@@ -1,6 +1,7 @@
 //url封装
 let apiUrl = {
-    register: "/register"
+    register: "/register",
+    userlist:"/userlist"
 }
 
 export default apiUrl;
